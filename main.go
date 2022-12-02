@@ -37,6 +37,7 @@ func runMain() {
 		AWS_SECRET_ACCESS_KEY = secretsMap["AWS_SECRET_ACCESS_KEY"]
 	} else {
 		AWS_ACCESS_KEY = secretsMap["AWS_ACCESS_KEY_"+strings.ToUpper(strings.ReplaceAll(region, "-", "_"))]
+		fmt.Printf("AWS Key = %s", AWS_ACCESS_KEY)
 		AWS_SECRET_ACCESS_KEY = secretsMap["AWS_SECRET_ACCESS_KEY_"+strings.ToUpper(strings.ReplaceAll(region, "-", "_"))]
 	}
 
