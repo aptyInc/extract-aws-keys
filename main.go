@@ -24,6 +24,7 @@ func runMain() {
 	AWS_SECRET_ACCESS_KEY := ""
 
 	var secretsMap map[string]string
+	fmt.Printf("Reached here")
 	if err := json.Unmarshal([]byte(secrets), &secretsMap); err != nil {
 		core.Error(fmt.Sprintf("error reading in secrets map %s", err.Error()))
 		return
