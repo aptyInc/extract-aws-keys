@@ -24,7 +24,7 @@ func runMain() {
 	AWS_SECRET_ACCESS_KEY := ""
 
 	var secretsMap map[string]string
-	fmt.Printf("Reached here")
+
 	if err := json.Unmarshal([]byte(secrets), &secretsMap); err != nil {
 		core.Error(fmt.Sprintf("error reading in secrets map %s", err.Error()))
 		return
@@ -38,7 +38,7 @@ func runMain() {
 		AWS_SECRET_ACCESS_KEY = secretsMap["AWS_SECRET_ACCESS_KEY"]
 	} else {
 		AWS_ACCESS_KEY = secretsMap["AWS_ACCESS_KEY_"+strings.ToUpper(strings.ReplaceAll(region, "-", "_"))]
-		fmt.Printf("AWS Key = %s", AWS_ACCESS_KEY)
+		core.Error(fmt.Sprintf("AWS Key = %s", AWS_ACCESS_KEY))
 		AWS_SECRET_ACCESS_KEY = secretsMap["AWS_SECRET_ACCESS_KEY_"+strings.ToUpper(strings.ReplaceAll(region, "-", "_"))]
 	}
 
