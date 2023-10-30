@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
-	"strings"
 
 	"github.com/actions-go/toolkit/core"
 )
@@ -30,14 +29,16 @@ func runMain() {
 	}
 
 	if branch == "development" || branch == "qa" || branch == "qa1" || branch == "staging" || branch == "hotfix" || branch == "demo" {
-		AWS_ACCESS_KEY = secretsMap["AWS_ACCESS_KEY_NON_PROD"]
-		AWS_SECRET_ACCESS_KEY = secretsMap["AWS_SECRET_ACCESS_KEY_NON_PROD"]
-	} else if region == "us-east-1" || region == "ap-southeast-2" || region == "eu-central-1" {
-		AWS_ACCESS_KEY = secretsMap["AWS_ACCESS_KEY"]
-		AWS_SECRET_ACCESS_KEY = secretsMap["AWS_SECRET_ACCESS_KEY"]
+		AWS_ACCESS_KEY = secretsMap["AWS_APTY_NON_PROD_ACCESS_KEY_ID"]
+		AWS_SECRET_ACCESS_KEY = secretsMap["AWS_APTY_NON_PROD_SECRET_ACCESS_KEY"]
+	} else if region == "us-east-1" || region == "ap-southeast-2" {
+		AWS_ACCESS_KEY = secretsMap["AWS_APTY_US_PROD_ACCESS_KEY_ID"]
+		AWS_SECRET_ACCESS_KEY = secretsMap["AWS_APTY_US_PROD_SECRET_ACCESS_KEY"]
+	} else if region == "eu-central-1" {
+		AWS_ACCESS_KEY = secretsMap["AWS_APTY_EU1_PROD_ACCESS_KEY_ID"]
+		AWS_SECRET_ACCESS_KEY = secretsMap["AWS_APTY_EU1_PROD_SECRET_ACCESS_KEY"]
 	} else {
-		AWS_ACCESS_KEY = secretsMap["AWS_ACCESS_KEY_"+strings.ToUpper(strings.ReplaceAll(region, "-", "_"))]
-		AWS_SECRET_ACCESS_KEY = secretsMap["AWS_SECRET_ACCESS_KEY_"+strings.ToUpper(strings.ReplaceAll(region, "-", "_"))]
+		// Do nothing
 	}
 
 	core.SetOutput("AWS_ACCESS_KEY", AWS_ACCESS_KEY)
