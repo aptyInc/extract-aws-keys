@@ -34,7 +34,7 @@ func runMain() {
 	fmt.Println("secrets: ", secrets)
 	fmt.Println("branch: ", branch)
 
-	if branch == "development" || branch == "qa" || branch == "qa1" || branch == "staging" || branch == "hotfix" || branch == "demo" {
+	if branch == "development" || branch == "qa" || branch == "qa1" || branch == "staging" || branch == "hotfix" || branch == "demo" || branch == "automation" {
 		fmt.Println("Using AWS_APTY_NON_PROD_ACCESS_KEY_ID")
 		AWS_ACCESS_KEY = secretsMap["AWS_APTY_NON_PROD_ACCESS_KEY_ID"]
 		AWS_SECRET_ACCESS_KEY = secretsMap["AWS_APTY_NON_PROD_SECRET_ACCESS_KEY"]
