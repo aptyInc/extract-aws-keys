@@ -1,6 +1,6 @@
 name: 'AptyInc'
 description: 'Provide a description here'
-author: 'SaiUmesh Dhanewar'
+author: 'aptyInc'
 inputs:
   SECRETS:
     description: "{{ toJson(secrets) }}"
