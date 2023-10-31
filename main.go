@@ -10,6 +10,8 @@ import (
 
 func runMain() {
 
+	fmt.Println("Starting extract aws keys process...")
+	
 	region := os.Getenv("AWS_REGION")
 	secrets := os.Getenv("SECRETS")
 	branch := os.Getenv("BRANCH")
@@ -28,25 +30,31 @@ func runMain() {
 		return
 	}
 
+	fmt.Println("Region: ", region)
+	fmt.Println("secrets: ", secrets)
+	fmt.Println("branch: ", branch)
+
 	if branch == "development" || branch == "qa" || branch == "qa1" || branch == "staging" || branch == "hotfix" || branch == "demo" {
+		fmt.Println("Using AWS_APTY_NON_PROD_ACCESS_KEY_ID")
 		AWS_ACCESS_KEY = secretsMap["AWS_APTY_NON_PROD_ACCESS_KEY_ID"]
 		AWS_SECRET_ACCESS_KEY = secretsMap["AWS_APTY_NON_PROD_SECRET_ACCESS_KEY"]
-		fmt.Println("NON_PROD Deploy")
 	} else if region == "us-east-1" || region == "ap-southeast-2" {
+		fmt.Println("Using AWS_APTY_US_PROD_ACCESS_KEY_ID")
 		AWS_ACCESS_KEY = secretsMap["AWS_APTY_US_PROD_ACCESS_KEY_ID"]
 		AWS_SECRET_ACCESS_KEY = secretsMap["AWS_APTY_US_PROD_SECRET_ACCESS_KEY"]
-		fmt.Println("PROD Deploy")
 	} else if region == "eu-central-1" {
+		fmt.Println("Using AWS_APTY_EU1_PROD_ACCESS_KEY_ID")
 		AWS_ACCESS_KEY = secretsMap["AWS_APTY_EU1_PROD_ACCESS_KEY_ID"]
 		AWS_SECRET_ACCESS_KEY = secretsMap["AWS_APTY_EU1_PROD_SECRET_ACCESS_KEY"]
-		fmt.Println("EU1 Deploy")
 	} else {
-		// Do nothing
+		core.Error("No AWS keys used check branch name and region configuration")
+		os.Exit(1)
 	}
 
 	core.SetOutput("AWS_ACCESS_KEY", AWS_ACCESS_KEY)
 	core.SetOutput("AWS_SECRET_ACCESS_KEY", AWS_SECRET_ACCESS_KEY)
 
+	fmt.Println("Done extracting aws keys process...")
 }
 
 func main() {
