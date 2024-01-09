@@ -29,7 +29,7 @@ func runMain() {
 		return
 	}
 
-	if branch == "development" || branch == "qa" || branch == "qa1" || branch == "staging" || branch == "hotfix" || branch == "demo" {
+	if branch == "development" || branch == "qa" || branch == "qa1" || branch == "staging" || branch == "hotfix" || branch == "demo" || branch == "automation" {
 		AWS_ACCESS_KEY = secretsMap["AWS_ACCESS_KEY_NON_PROD"]
 		AWS_SECRET_ACCESS_KEY = secretsMap["AWS_SECRET_ACCESS_KEY_NON_PROD"]
 	} else if region == "us-east-1" || region == "ap-southeast-2" || region == "eu-central-1" {
