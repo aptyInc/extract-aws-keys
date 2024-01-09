@@ -1,4 +1,4 @@
-# GitHub action to get bundle keys
+# GitHub action to get bundle keys.
 
 ## usage
 
