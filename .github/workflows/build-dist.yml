@@ -4,6 +4,7 @@ on: # rebuild any branch changes
   push:
     branches:
       - master
+      - development
 
 jobs:
   build:
