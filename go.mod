@@ -1,6 +1,6 @@
 module github.com/actions-go/go-action
 
-go 1.13
+go 1.20
 
 require (
 	github.com/actions-go/toolkit v0.0.0-20200119151346-09edac1c7d93
