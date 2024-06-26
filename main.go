@@ -14,7 +14,7 @@ func runMain() {
 
 	region := os.Getenv("AWS_REGION")
 	secrets := os.Getenv("SECRETS")
-	branch := os.Getenv("BRANCH")
+	environment := os.Getenv("ENVIRONMENT")
 
 	if region == "" || secrets == "" {
 		core.Error("AWS_REGION or SECRETS is not set")
@@ -36,15 +36,15 @@ func runMain() {
 
 	fmt.Println("Region: ", region)
 	fmt.Println("secrets: ", secrets)
-	fmt.Println("branch: ", branch)
+	fmt.Println("environment: ", environment)
 
-	if branch == "development" || branch == "qa" || branch == "staging" || branch == "hotfix" || branch == "automation" {
+	if environment == "development" || environment == "qa" || environment == "staging" || environment == "hotfix" || environment == "automation" {
 		fmt.Println("Using Non Prod Keys")
 		AWS_ACCESS_KEY = secretsMap["AWS_APTY_NON_PROD_ACCESS_KEY_ID"]
 		AWS_SECRET_ACCESS_KEY = secretsMap["AWS_APTY_NON_PROD_SECRET_ACCESS_KEY"]
 		DB_PASSWORD = secretsMap["K8S_NON_PROD_DB_PASSWORD"]
 		INTERNAL_API_ACCESS_KEY = secretsMap["K8S_NON_PROD_INTERNAL_API_ACCESS_KEY"]
-	} else if branch == "demo" {
+	} else if environment == "demo" {
 		fmt.Println("Using Demo Keys")
 		AWS_ACCESS_KEY = secretsMap["AWS_APTY_NON_PROD_ACCESS_KEY_ID"]
 		AWS_SECRET_ACCESS_KEY = secretsMap["AWS_APTY_NON_PROD_SECRET_ACCESS_KEY"]
@@ -69,7 +69,7 @@ func runMain() {
 		DB_PASSWORD = secretsMap["K8S_EU1_PROD_DB_PASSWORD"]
 		INTERNAL_API_ACCESS_KEY = secretsMap["K8S_PROD_INTERNAL_API_ACCESS_KEY"]
 	} else {
-		core.Error("No AWS keys used check branch name and region configuration")
+		core.Error("No AWS keys used check environment name and region configuration")
 		os.Exit(1)
 	}
 	NO_REPLY_EMAIL_PASSWORD = secretsMap["K8S_NO_REPLY_EMAIL_PASSWORD"]
