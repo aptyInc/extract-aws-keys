@@ -38,7 +38,7 @@ func runMain() {
 	fmt.Println("secrets: ", secrets)
 	fmt.Println("environment: ", environment)
 
-	if environment == "development" || environment == "qa" || environment == "staging" || environment == "hotfix" || environment == "automation" {
+	if environment == "development" || environment == "qa" || environment == "staging" || environment == "hotfix" || environment == "automation" || environment == "onprem" {
 		fmt.Println("Using Non Prod Keys")
 		AWS_ACCESS_KEY = secretsMap["AWS_APTY_NON_PROD_ACCESS_KEY_ID"]
 		AWS_SECRET_ACCESS_KEY = secretsMap["AWS_APTY_NON_PROD_SECRET_ACCESS_KEY"]
