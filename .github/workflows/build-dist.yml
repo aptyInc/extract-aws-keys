@@ -43,12 +43,36 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           name: main-windows-latest
-      - name: Bump and Tag Version
-        id: tag_version
+      - name: Get Current Version
+        id: get_version
+        run: |
+          # Get the latest tag (assuming tags are in the format vX.X)
+          latest_tag=$(git describe --tags `git rev-list --tags --max-count=1`)
+          echo "Latest tag: $latest_tag"
+
+          # Parse version number and increment minor version
+          version=${latest_tag#v} # Remove 'v' prefix
+          major=${version%%.*}    # Extract major version
+          minor=${version#*.}     # Extract minor version
+          minor=${minor%%.*}      # Ensure it's a clean number
+          next_minor=$((minor + 1)) # Increment minor version
+          next_version="v${major}.${next_minor}"
+          echo "Next version: $next_version"
+
+          # Export as environment variable for next steps
+          echo "NEXT_VERSION=$next_version" >> $GITHUB_ENV
+
+      - name: Create and Push New Tag
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          VERSION=$(date +'%Y%m%d%H%M%S')
-          echo "VERSION=$VERSION" >> $GITHUB_ENV
-          git tag "v${VERSION}"
-          git push origin "v${VERSION}"
+          git tag "$NEXT_VERSION"
+          git push origin "$NEXT_VERSION"
+
+      - name: Download All Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: ./artifacts
+
+      - name: List Downloaded Artifacts
+        run: ls -R ./artifacts
