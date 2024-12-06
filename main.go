@@ -27,6 +27,7 @@ func runMain() {
 	NO_REPLY_EMAIL_PASSWORD := ""
 	INTERNAL_API_ACCESS_KEY := ""
 	FEATURE_FLAG_API_KEY := ""
+	EXTERNAL_API_ACCESS_KEY := ""
 
 	var secretsMap map[string]string
 	if err := json.Unmarshal([]byte(secrets), &secretsMap); err != nil {
@@ -44,6 +45,7 @@ func runMain() {
 		AWS_SECRET_ACCESS_KEY = secretsMap["AWS_APTY_NON_PROD_SECRET_ACCESS_KEY"]
 		DB_PASSWORD = secretsMap["K8S_NON_PROD_DB_PASSWORD"]
 		INTERNAL_API_ACCESS_KEY = secretsMap["K8S_NON_PROD_INTERNAL_API_ACCESS_KEY"]
+		EXTERNAL_API_ACCESS_KEY = secretsMap["K8S_NON_PROD_EXTERNAL_API_ACCESS_KEY"]
 		FEATURE_FLAG_API_KEY = secretsMap["K8S_QA_FEATURE_FLAG_API_KEY"] // QA env used for QA, hotfix, automation envs
 		if environment == "development" {
 			FEATURE_FLAG_API_KEY = secretsMap["K8S_DEVELOPMENT_FEATURE_FLAG_API_KEY"]
@@ -56,6 +58,7 @@ func runMain() {
 		AWS_SECRET_ACCESS_KEY = secretsMap["AWS_APTY_NON_PROD_SECRET_ACCESS_KEY"]
 		DB_PASSWORD = secretsMap["K8S_DEMO_DB_PASSWORD"]
 		INTERNAL_API_ACCESS_KEY = secretsMap["K8S_NON_PROD_INTERNAL_API_ACCESS_KEY"]
+		EXTERNAL_API_ACCESS_KEY = secretsMap["K8S_NON_PROD_EXTERNAL_API_ACCESS_KEY"]
 		FEATURE_FLAG_API_KEY = secretsMap["K8S_DEMO_FEATURE_FLAG_API_KEY"]
 	} else if region == "us-east-1" {
 		fmt.Println("Using US prod keys")
@@ -63,6 +66,7 @@ func runMain() {
 		AWS_SECRET_ACCESS_KEY = secretsMap["AWS_APTY_US_PROD_SECRET_ACCESS_KEY"]
 		DB_PASSWORD = secretsMap["K8S_US_PROD_DB_PASSWORD"]
 		INTERNAL_API_ACCESS_KEY = secretsMap["K8S_PROD_INTERNAL_API_ACCESS_KEY"]
+		EXTERNAL_API_ACCESS_KEY = secretsMap["K8S_PROD_EXTERNAL_API_ACCESS_KEY"]
 		FEATURE_FLAG_API_KEY = secretsMap["K8S_US_PROD_FEATURE_FLAG_API_KEY"]
 	} else if region == "ap-southeast-2" {
 		fmt.Println("Using AU prod Keys")
@@ -70,6 +74,7 @@ func runMain() {
 		AWS_SECRET_ACCESS_KEY = secretsMap["AWS_APTY_US_PROD_SECRET_ACCESS_KEY"]
 		DB_PASSWORD = secretsMap["K8S_AU_PROD_DB_PASSWORD"]
 		INTERNAL_API_ACCESS_KEY = secretsMap["K8S_PROD_INTERNAL_API_ACCESS_KEY"]
+		EXTERNAL_API_ACCESS_KEY = secretsMap["K8S_PROD_EXTERNAL_API_ACCESS_KEY"]
 		FEATURE_FLAG_API_KEY = secretsMap["K8S_US_PROD_FEATURE_FLAG_API_KEY"]
 	} else if region == "eu-central-1" {
 		fmt.Println("Using EU1 prod keys")
@@ -77,6 +82,7 @@ func runMain() {
 		AWS_SECRET_ACCESS_KEY = secretsMap["AWS_APTY_EU1_PROD_SECRET_ACCESS_KEY"]
 		DB_PASSWORD = secretsMap["K8S_EU1_PROD_DB_PASSWORD"]
 		INTERNAL_API_ACCESS_KEY = secretsMap["K8S_PROD_INTERNAL_API_ACCESS_KEY"]
+		EXTERNAL_API_ACCESS_KEY = secretsMap["K8S_PROD_EXTERNAL_API_ACCESS_KEY"]
 		FEATURE_FLAG_API_KEY = secretsMap["K8S_EU1_PROD_FEATURE_FLAG_API_KEY"]
 	} else {
 		core.Error("No AWS keys used check environment name and region configuration")
@@ -88,6 +94,7 @@ func runMain() {
 	core.SetOutput("AWS_SECRET_ACCESS_KEY", AWS_SECRET_ACCESS_KEY)
 	core.SetOutput("DB_PASSWORD", DB_PASSWORD)
 	core.SetOutput("INTERNAL_API_ACCESS_KEY", INTERNAL_API_ACCESS_KEY)
+	core.SetOutput("EXTERNAL_API_ACCESS_KEY", EXTERNAL_API_ACCESS_KEY)
 	core.SetOutput("NO_REPLY_EMAIL_PASSWORD", NO_REPLY_EMAIL_PASSWORD)
 	core.SetOutput("FEATURE_FLAG_API_KEY", FEATURE_FLAG_API_KEY)
 
