@@ -68,11 +68,20 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git tag "$NEXT_VERSION"
           git push origin "$NEXT_VERSION"
-
       - name: Download All Artifacts
         uses: actions/download-artifact@v4
         with:
           path: ./artifacts
-
       - name: List Downloaded Artifacts
         run: ls -R ./artifacts
+      - name: Create a GitHub Release
+        uses: actions/create-release@v1
+        with:
+          tag_name: ${{ env.NEXT_VERSION }}
+          release_name: Release ${{ env.NEXT_VERSION }}
+          body: |
+            This release includes:
+            - Updated binaries
+            - Bug fixes and enhancements
+          draft: false
+          prerelease: false
