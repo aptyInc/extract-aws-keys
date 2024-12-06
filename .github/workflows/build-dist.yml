@@ -39,4 +39,12 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           name: main-windows-latest
-      - uses: actions-go/update@v1
+      - name: Bump and Tag Version
+        id: tag_version
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          VERSION=$(date +'%Y%m%d%H%M%S')
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+          git tag "v${VERSION}"
+          git push origin "v${VERSION}"
