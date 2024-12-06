@@ -85,3 +85,4 @@ jobs:
             - Bug fixes and enhancements
           draft: false
           prerelease: false
+          token: ${{ secrets.GITHUB_TOKEN }}
