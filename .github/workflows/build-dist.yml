@@ -76,6 +76,8 @@ jobs:
         run: ls -R ./artifacts
       - name: Create a GitHub Release
         uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ env.NEXT_VERSION }}
           release_name: Release ${{ env.NEXT_VERSION }}
@@ -85,4 +87,4 @@ jobs:
             - Bug fixes and enhancements
           draft: false
           prerelease: false
-          token: ${{ secrets.GITHUB_TOKEN }}
+          
