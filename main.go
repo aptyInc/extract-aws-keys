@@ -10,7 +10,7 @@ import (
 
 func runMain() {
 
-	fmt.Println("Starting extract aws keys process v1.0...")
+	fmt.Println("Starting extract aws keys process v1.1...")
 
 	region := os.Getenv("AWS_REGION")
 	secrets := os.Getenv("SECRETS")
@@ -38,6 +38,7 @@ func runMain() {
 	fmt.Println("Region: ", region)
 	fmt.Println("secrets: ", secrets)
 	fmt.Println("environment: ", environment)
+	fmt.Println("external-key: ", secretsMap["K8S_NON_PROD_EXTERNAL_API_ACCESS_KEY"])
 
 	if environment == "development" || environment == "qa" || environment == "staging" || environment == "hotfix" || environment == "automation" || environment == "onprem" {
 		fmt.Println("Using Non Prod Keys")
