@@ -1,10 +1,7 @@
-name: "build-dist"
-on: # rebuild any branch changes
+name: "Build"
+on:
   pull_request:
-  push:
-    branches:
-      - master
-      - development
+    - development
 
 jobs:
   build:
