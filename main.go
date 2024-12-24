@@ -49,6 +49,7 @@ func runMain() {
 		EXTERNAL_API_ACCESS_KEY = secretsMap["K8S_NON_PROD_EXTERNAL_API_ACCESS_KEY"]
 		FEATURE_FLAG_API_KEY = secretsMap["K8S_QA_FEATURE_FLAG_API_KEY"] // QA env used for QA, hotfix, automation envs
 		if environment == "development" {
+			fmt.Println("Starting extract aws keys process from development env")
 			FEATURE_FLAG_API_KEY = secretsMap["K8S_DEVELOPMENT_FEATURE_FLAG_API_KEY"]
 		} else if environment == "staging" {
 			FEATURE_FLAG_API_KEY = secretsMap["K8S_STAGING_FEATURE_FLAG_API_KEY"]
