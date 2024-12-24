@@ -44,7 +44,8 @@ jobs:
         with:
           name: main-windows-latest
       - uses: actions-go/update@v1
-      
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Get Current Version
         id: get_version
         run: |
