@@ -43,9 +43,7 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           name: main-windows-latest
-      - uses: actions/download-artifact@v4
-        with:
-          name: main-windows-latest
+
       - name: Get Current Version
         id: get_version
         run: |
