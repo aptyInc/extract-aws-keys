@@ -9,13 +9,5 @@ inputs:
     description: 'Branch name'
     required: true
 runs:
-  using: "composite"
-  steps:
-    - uses: actions/checkout@v4
-      with:
-        fetch-depth: 0
-    - run: ./dist/main_linux
-      shell: bash
-      env:
-        SECRETS: ${{ inputs.SECRETS }}
-        BRANCH_NAME: ${{ inputs.BRANCH_NAME }}
+  using: 'node12'
+  main: 'dist/index.js'
