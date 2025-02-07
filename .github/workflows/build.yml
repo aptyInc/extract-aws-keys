@@ -13,17 +13,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set AWS Region and Environment Variables
-        run: |
-          echo "AWS_REGION=us-east-1" >> $GITHUB_ENV
-          echo "ENVIRONMENT=development" >> $GITHUB_ENV
-
       - name: Extract AWS keys
         uses: aptyInc/extract-aws-keys@v2
         with:
-          AWS_REGION: ${{ env.AWS_REGION }}
+          AWS_REGION: us-east-1
           SECRETS: ${{ env.SECRETS }}
-          ENVIRONMENT: ${{ env.ENVIRONMENT }}
+          ENVIRONMENT: development
 
       - name: Output AWS keys
         run: |
