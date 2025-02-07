@@ -2,7 +2,7 @@ const core = require('@actions/core');
 const process = require('process');
 
 function runMain() {
-    console.log("Starting extract AWS keys process v1.1...");
+    console.log("Starting extract AWS keys process");
 
     const region = process.env.AWS_REGION;
     const secrets = process.env.SECRETS;
