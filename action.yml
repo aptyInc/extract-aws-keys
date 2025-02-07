@@ -1,13 +1,34 @@
-name: 'AptyInc'
-description: 'Extract Apty Keys'
-author: 'Apty Inc'
+name: 'Extract AWS Keys'
+description: 'Extract AWS keys based on environment and region settings.'
+
 inputs:
+  AWS_REGION:
+    description: 'The AWS region for the environment.'
+    required: true
+    default: 'us-east-1'
   SECRETS:
-    description: 'JSON object of secrets'
+    description: 'A JSON string containing all the secret keys.'
     required: true
-  BRANCH_NAME:
-    description: 'Branch name'
+  ENVIRONMENT:
+    description: 'The environment to run the action in (e.g., development, qa, prod).'
     required: true
+
+outputs:
+  AWS_ACCESS_KEY:
+    description: 'The AWS access key.'
+  AWS_SECRET_ACCESS_KEY:
+    description: 'The AWS secret access key.'
+  DB_PASSWORD:
+    description: 'The database password.'
+  INTERNAL_API_ACCESS_KEY:
+    description: 'Internal API access key.'
+  EXTERNAL_API_ACCESS_KEY:
+    description: 'External API access key.'
+  NO_REPLY_EMAIL_PASSWORD:
+    description: 'No-reply email password.'
+  FEATURE_FLAG_API_KEY:
+    description: 'Feature flag API key.'
+
 runs:
   using: 'node12'
-  main: 'dist/index.js'
+  main: 'index.js'
