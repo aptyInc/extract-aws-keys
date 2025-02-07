@@ -100,23 +100,6 @@ func runMain() {
 	core.SetOutput("FEATURE_FLAG_API_KEY", FEATURE_FLAG_API_KEY)
 
 	fmt.Println("Done extracting aws keys process...")
-
-	// Save secretsMap to a JSON file
-	file, err := os.Create("secrets.json")
-	if err != nil {
-		core.Error(fmt.Sprintf("Error creating file: %s", err.Error()))
-		os.Exit(1)
-	}
-	defer file.Close()
-
-	encoder := json.NewEncoder(file)
-	encoder.SetIndent("", "  ") // Pretty print JSON
-	if err := encoder.Encode(secretsMap); err != nil {
-		core.Error(fmt.Sprintf("Error writing JSON to file: %s", err.Error()))
-		os.Exit(1)
-	}
-
-	fmt.Println("Secrets have been saved to secrets.json")
 }
 
 func main() {
