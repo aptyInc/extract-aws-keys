@@ -4,8 +4,8 @@
 
 ```yaml
 jobs:
-  UUID:
-    name: UUID
+  getKeys:
+    name: GetKeys
     runs-on: ubuntu-latest
     steps:
       - name: Get Keys
