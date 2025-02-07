@@ -19,7 +19,7 @@ jobs:
           echo "ENVIRONMENT=development" >> $GITHUB_ENV
 
       - name: Extract AWS keys
-        uses: ./github/actions/extract-aws-keys
+        uses: aptyInc/extract-aws-keys@v2
         with:
           AWS_REGION: ${{ env.AWS_REGION }}
           SECRETS: ${{ env.SECRETS }}
